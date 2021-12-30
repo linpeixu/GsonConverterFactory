@@ -33,6 +33,9 @@ public abstract class DefaultConverterFactory<S, F> extends BaseConverterFactory
         }
         Class<S> classType = getSuccessClassType();
         if (classType != null) {
+            if (classType == String.class) {
+                return (S) json;
+            }
             return new Gson().fromJson(json, classType);
         }
         return null;
@@ -45,6 +48,9 @@ public abstract class DefaultConverterFactory<S, F> extends BaseConverterFactory
         }
         Class<F> classType = getFailClassType();
         if (classType != null) {
+            if (classType == String.class) {
+                return (F) json;
+            }
             return new Gson().fromJson(json, classType);
         }
         return null;
